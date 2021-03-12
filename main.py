@@ -8,12 +8,25 @@ import cache_v2
 
 # --------------------------------------------------------------------------------------
 """
+## 📚 Cache / Memo function
+
+We still want to have a decorator to cache long-running functions! 
+
+This should look very similar to the existing `st.cache` but be simpler to use 
+(especially reduce complexity around hashing). All use cases which bloat up the current
+`st.cache` should be handled by the functions below.
+
+**TODO. Could we just use [`functools.cache`](https://docs.python.org/3/library/functools.html#functools.cache) for this?**
+"""
+
+# --------------------------------------------------------------------------------------
+"""
 ## 💻 Session state
 
 This is a `dict` which is persistent only during the current browser session (i.e. until 
 the tab is closed). 
 
-See session state prototypes.
+See existing session state prototypes.
 """
 
 
