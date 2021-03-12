@@ -1,3 +1,8 @@
+"""
+This file monkey-patches streamlit with new functions for st.cache v2. Just import it 
+into your app and you can use the new functions!
+"""
+
 import streamlit as st
 import json
 import os
@@ -16,10 +21,11 @@ def global_state(**kwargs):
 
 
 class JSONDatabase(dict):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if os.path.exists("database.json"):
-            with open("database.json", "r") as f:
+    def __init__(self, filename):
+        super().__init__()
+        self.filename = filename
+        if os.path.exists(self.filename):
+            with open(self.filename, "r") as f:
                 saved_data = json.load(f)
                 for k, v in saved_data.items():
                     self[k] = v
@@ -35,12 +41,12 @@ class JSONDatabase(dict):
         self.save()
 
     def save(self):
-        with open("database.json", "w") as f:
+        with open(self.filename, "w") as f:
             json.dump(self, f)
 
 
 def database():
-    return JSONDatabase()
+    return JSONDatabase("database.json")
 
 
 st.global_state = global_state
