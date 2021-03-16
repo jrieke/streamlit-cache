@@ -46,10 +46,12 @@ class UserIdComponent extends StreamlitComponentBase {
     if (user_id) {
       console.log("[Streamlit] Found existing token: " + user_id)
     } else {
+      console.log("[Streamlit] Couldn't find token")
       user_id = cookies.get("streamlit_user_id")
       if (user_id) {
         console.log("[Streamlit] Found existing user id: " + user_id)
       } else {
+        console.log("[Streamlit] Couldn't find user id")
         // Create new random user id.
         user_id = uuidv4()
 
