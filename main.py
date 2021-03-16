@@ -4,19 +4,39 @@ from coolname import generate_slug
 
 import cache_v2
 
-"# Exploration of `st.cache` v2"
+st.image(
+    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/billed-cap_1f9e2.png",
+    width=100,
+)
+"""
+# Exploration of `st.cache` v2
+
+Quick and dirty interactive prototype by Johannes to explore how the next version 
+of `st.cache` could look like. See the roadmap item for more details. 
+
+**How can I use this in my own code?!**
+
+    git clone https://github.com/jrieke/streamlit-cache
+    cd streamlit-cache
+    
+Then create a streamlit app and do this at the top:
+
+    import cache_v2
+    
+That's it! 🎈 You should now be able to use all functions outlined below.
+
+"""
 
 # --------------------------------------------------------------------------------------
 """
 ## 📚 Cache / Memo function
 
-We still want to have a decorator to cache long-running functions! 
+- function decorator to cache long-running functions
+- very similar to existing `st.cache`
+- but should be simpler to use, not be overloaded with hashing etc.
+- maybe we could simply use [`functools.cache`](https://docs.python.org/3/library/functools.html#functools.cache)?
 
-This should look very similar to the existing `st.cache` but be simpler to use 
-(especially reduce complexity around hashing). All use cases which bloat up the current
-`st.cache` should be handled by the functions below.
-
-**TODO. Could we just use [`functools.cache`](https://docs.python.org/3/library/functools.html#functools.cache) for this?**
+**TODO**
 """
 
 # --------------------------------------------------------------------------------------
