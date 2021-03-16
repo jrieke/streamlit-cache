@@ -51,5 +51,21 @@ def database():
     return JSONDatabase("database.json")
 
 
+user_store = {}
+
+def _user_state(**kwargs):
+    
+    # TODO: Do we need to set `key` here? Maybe if this is called multiple times?
+    user_id = st_user_id()
+    print("User ID:", user_id)
+    
+    if user_id not in user_store:
+        print("New user")
+        user_store[user_id] = kwargs.copy()
+    
+    return user_store[user_id]
+
+
 st.global_state = global_state
+st.user_state = _user_state
 st.database = database

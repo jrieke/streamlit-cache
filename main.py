@@ -39,8 +39,30 @@ This is a `dict` which is persistent across all sessions of the same user.
 A user can either be an authenticated user in S4T or we can set a browser cookie to 
 identify unique users (this would require a custom component to set cookies).
 
-**TODO**
+Initialize it with:
 """
+
+with st.echo():
+    user_state = st.user_state(a=123)
+    
+"Add a value at runtime with:"
+
+with st.echo():
+    user_state["b"] = 456
+
+add_random = st.button("Add random value to user")
+if add_random:
+    user_state[generate_slug(2)] = np.random.randint(100)
+
+clear = st.button("Clear user")
+if clear:
+    user_state.clear()
+    
+"""
+This is the current user state:
+"""
+st.write(user_state)
+    
 
 
 # --------------------------------------------------------------------------------------
