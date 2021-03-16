@@ -10,16 +10,21 @@ import os
 from user_id_component import st_user_id
 
 
-def global_state(**kwargs):
-    if hasattr(st, "_first_run_done"):
-        print("First run already done -> not setting global state")
-    else:
-        print("First run -> setting global state")
-        st._global_state = {}
-        for k, v in kwargs.items():
-            st._global_state[k] = v
-        st._first_run_done = True
-    return st._global_state
+global_store = {}
+config = {}
+
+
+def _global_state(**kwargs):
+    # if hasattr(st, "_first_run_done"):
+    #     print("First run already done -> not setting global state")
+    # else:
+    #     print("First run -> setting global state")
+    #     st._global_state = {}
+    if not config["initialized"]:
+        global_store.update(kwargs)
+        config["initialized"] = True
+    # st._first_run_done = True
+    return global_store
 
 
 class JSONDatabase(dict):
@@ -53,19 +58,20 @@ def database():
 
 user_store = {}
 
+
 def _user_state(**kwargs):
-    
+
     # TODO: Do we need to set `key` here? Maybe if this is called multiple times?
     user_id = st_user_id()
     print("User ID:", user_id)
-    
+
     if user_id not in user_store:
         print("New user")
         user_store[user_id] = kwargs.copy()
-    
+
     return user_store[user_id]
 
 
-st.global_state = global_state
+st.global_state = _global_state
 st.user_state = _user_state
 st.database = database
