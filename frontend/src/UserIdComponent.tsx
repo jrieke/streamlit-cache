@@ -41,6 +41,10 @@ class UserIdComponent extends StreamlitComponentBase {
   }
 
   public componentDidMount() {
+
+    var all_cookies = cookies.getAll()
+    console.log(all_cookies)
+    
     // Check for existing user id in cookies.
     var user_id = cookies.get("streamlit_token") // for Streamlit Sharing
     if (user_id) {
