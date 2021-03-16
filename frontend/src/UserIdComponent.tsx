@@ -55,7 +55,7 @@ class UserIdComponent extends StreamlitComponentBase {
       inOneYear.setFullYear(inOneYear.getFullYear() + 1)
 
       // Store new user id in cookie.
-      cookies.set('streamlit_user_id', user_id, { path: '/' , expires: inOneYear})
+      cookies.set('streamlit_user_id', user_id, { path: '/' , expires: inOneYear, domain: "share.streamlit.io"})
       console.log("[Streamlit] Couldn't find existing user id, storing new one: " + user_id)
     }
 
