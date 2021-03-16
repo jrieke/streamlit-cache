@@ -59,6 +59,8 @@ See existing session state prototypes.
 - `dict`
 - Persisted for all sessions of a user (identified via browser cookie or S4T auth)
 - Reset when opened from a new user / computer / browser
+
+In this prototype, users are identified with a browser cookie.
 """
 st.warning("Doesn't work on Streamlit Sharing yet, only locally :/")
 """
