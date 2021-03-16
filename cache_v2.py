@@ -7,6 +7,8 @@ import streamlit as st
 import json
 import os
 
+from user_id_component import st_user_id
+
 
 def global_state(**kwargs):
     if hasattr(st, "_first_run_done"):
