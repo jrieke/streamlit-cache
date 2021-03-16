@@ -23,8 +23,9 @@ This should look very similar to the existing `st.cache` but be simpler to use
 """
 ## 💻 Session state
 
-This is a `dict` which is persistent only during the current browser session (i.e. until 
-the tab is closed). 
+- `dict`
+- Persisted for the current session / browser tab
+- Reset when opening a new tab
 
 See existing session state prototypes.
 """
@@ -34,45 +35,42 @@ See existing session state prototypes.
 """
 ## 👤 User state
 
-This is a `dict` which is persistent across all sessions of the same user. 
+- `dict`
+- Persisted for all sessions of a user (identified via browser cookie or S4T auth)
+- Reset when opened from a new user / computer / browser
 
-A user can either be an authenticated user in S4T or we can set a browser cookie to 
-identify unique users (this would require a custom component to set cookies).
-
-Initialize it with:
+Initialize with:
 """
 
 with st.echo():
     user_state = st.user_state(a=123)
-    
+
 "Add a value at runtime with:"
 
 with st.echo():
     user_state["b"] = 456
 
-add_random = st.button("Add random value to user")
-if add_random:
+if st.button("Add random value", key="add_user"):
     user_state[generate_slug(2)] = np.random.randint(100)
 
-clear = st.button("Clear user")
-if clear:
+if st.button("Clear user state", key="clear_user"):
     user_state.clear()
-    
+
 """
 This is the current user state:
 """
 st.write(user_state)
-    
 
 
 # --------------------------------------------------------------------------------------
 """
 ## 🌐 Global state
 
-This is a `dict` which is persistent across all users and sessions (but it's wiped 
-if you re-start streamlit). 
+- `dict`
+- Persisted across all sessions and users
+- Reset when streamlit is re-started
 
-Initialize it with:
+Initialize with:
 """
 
 with st.echo():
@@ -83,12 +81,10 @@ with st.echo():
 with st.echo():
     global_state["b"] = 456
 
-add_random = st.button("Add random value")
-if add_random:
+if st.button("Add random value", key="add_global"):
     global_state[generate_slug(2)] = np.random.randint(100)
 
-clear = st.button("Clear")
-if clear:
+if st.button("Clear", key="clear_global"):
     global_state.clear()
 
 """
@@ -101,12 +97,12 @@ st.write(global_state)
 """
 ## 🛒 Database
 
-This is a `dict`-like store (but contents must be JSON-serializable!) which is 
-persistent across all users and session and even if streamlit is re-started.
+- `dict`-like store (objects need to be JSON-serializable)
+- Persisted until eternity, across all users / sessions / restarts
+- Reset manually
 
-Ideally, these values would be stored in S4A (and maybe in a file for local 
-development?). Here we just fake it by storing everything in a local JSON file 
-(`database.json`). 
+Data could be stored along with the app in S4A/S4T, locally in a file. In this prototype 
+the data is simply put into a JSON-file (`database.json`). 
 
 Initialize with:
 """
@@ -117,15 +113,13 @@ with st.echo():
 with st.echo():
     db["a"] = 123
 
-if st.button("Add random value to DB"):
+if st.button("Add random value", key="add_db"):
     db[generate_slug(2)] = np.random.randint(100)
 
-if st.button("Clear DB"):
+if st.button("Clear", key="clear_db"):
     db.clear()
 
 """
 This is the current database content:
 """
 st.write(db)
-
-"Restart streamlit to see that the values above are preserved 🎈 "
