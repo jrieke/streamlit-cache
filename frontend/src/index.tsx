@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import MyComponent from "./MyComponent"
+import UserIdComponent from "./UserIdComponent"
 
 ReactDOM.render(
   <React.StrictMode>
-    <MyComponent />
+    <UserIdComponent />
   </React.StrictMode>,
   document.getElementById("root")
 )
