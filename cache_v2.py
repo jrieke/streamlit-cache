@@ -10,8 +10,9 @@ import os
 from user_id_component import st_user_id
 
 
-global_store = {}
 config = {"initialized": False}
+global_store = {}
+user_store = {}
 
 
 def _global_state(**kwargs):
@@ -25,6 +26,19 @@ def _global_state(**kwargs):
         config["initialized"] = True
     # st._first_run_done = True
     return global_store
+
+
+def _user_state(**kwargs):
+
+    # TODO: Do we need to set `key` here? Maybe if this is called multiple times?
+    user_id = st_user_id()
+    print("User ID:", user_id)
+
+    if user_id not in user_store:
+        print("New user")
+        user_store[user_id] = kwargs.copy()
+
+    return user_store[user_id]
 
 
 class JSONDatabase(dict):
@@ -54,22 +68,6 @@ class JSONDatabase(dict):
 
 def _database():
     return JSONDatabase("database.json")
-
-
-user_store = {}
-
-
-def _user_state(**kwargs):
-
-    # TODO: Do we need to set `key` here? Maybe if this is called multiple times?
-    user_id = st_user_id()
-    print("User ID:", user_id)
-
-    if user_id not in user_store:
-        print("New user")
-        user_store[user_id] = kwargs.copy()
-
-    return user_store[user_id]
 
 
 st.global_state = _global_state
