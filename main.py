@@ -54,13 +54,14 @@ See existing session state prototypes.
 # --------------------------------------------------------------------------------------
 """
 ## 👤 User state
-"""
-st.warning("Doesn't work on Streamlit Sharing yet, only locally :/")
-"""
+
+
 - `dict`
 - Persisted for all sessions of a user (identified via browser cookie or S4T auth)
 - Reset when opened from a new user / computer / browser
-
+"""
+st.warning("Doesn't work on Streamlit Sharing yet, only locally :/")
+"""
 Initialize with:
 """
 
