@@ -11,7 +11,7 @@ from user_id_component import st_user_id
 
 
 global_store = {}
-config = {}
+config = {"initialized": False}
 
 
 def _global_state(**kwargs):
@@ -52,7 +52,7 @@ class JSONDatabase(dict):
             json.dump(self, f)
 
 
-def database():
+def _database():
     return JSONDatabase("database.json")
 
 
@@ -74,4 +74,4 @@ def _user_state(**kwargs):
 
 st.global_state = _global_state
 st.user_state = _user_state
-st.database = database
+st.database = _database
