@@ -84,6 +84,10 @@ This is the current user state:
 """
 st.write(user_state)
 
+st.info(
+    "☝️ **Try it out:** Open a new tab and user state should be the same. Open an incognito window and it should be reset."
+)
+
 
 # --------------------------------------------------------------------------------------
 """
@@ -114,6 +118,10 @@ if st.button("Clear", key="clear_global"):
 This is the current global state:
 """
 st.write(global_state)
+
+st.info(
+    "☝️ **Try it out:** Open a new tab or incognito window and global state should be the same. Re-start streamlit and it should be reset."
+)
 
 
 # --------------------------------------------------------------------------------------
@@ -146,3 +154,7 @@ if st.button("Clear", key="clear_db"):
 This is the current database content:
 """
 st.write(db)
+
+st.info(
+    "☝️ **Try it out:** Do anything you want and database content should be the same."
+)
